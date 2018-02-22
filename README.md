@@ -3,11 +3,11 @@ Based on svg-to-react-cli.
 A command line utility that takes a svg image file and outputs a fully formatted stateless functional React Native component with `height` and `width` for props. With flags to toggle formatting and remove style attributes.
 
 ## To Use
-`npm install -g svg-to-react-naive-cli`
+`npm install -g svg-to-react-native-cli`
 
 ### One File
 
-`svg-to-react-native src/svg/images/logo Logo --output ./src/svg/components/`
+`svg-to-rn src/svg/images/logo Logo --output ./src/svg/components/`
 
 **NOTE**: image file must be in current working directory. Do not add the extension. If file is `image.svg`, then just enter `image` as the first argument. ComponentName will be the name of the sfc and filename with `.js` appended.
 

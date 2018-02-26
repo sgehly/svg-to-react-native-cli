@@ -30,6 +30,6 @@
   },
   "homepage": "https://github.com/chrisbull/svg-to-react-native-cli#readme",
   "bin": {
-    "svg-to-rn": "./index.js"
+    "svg-to-react-native": "./index.js"
   } 
 }

@@ -7,7 +7,7 @@ A command line utility that takes a svg image file and outputs a fully formatted
 
 ### One File
 
-`svg-to-react-native src/svg/images/logo Logo --output ./src/svg/components/`
+`svg-to-rn src/svg/images/logo Logo --output ./src/svg/components/`
 
 **NOTE**: image file must be in current working directory. Do not add the extension. If file is `image.svg`, then just enter `image` as the first argument. ComponentName will be the name of the sfc and filename with `.js` appended.
 

@@ -9,5 +9,4 @@ const chalk = require('chalk');
  */
 module.exports.printErrors = function(text) {
   console.log(chalk.red(text));
-  console.log();
 }

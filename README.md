@@ -7,20 +7,20 @@ A command line utility that takes a svg image file and outputs a fully formatted
 
 ### One File
 
-`svg-to-react-native src/svg/images/logo Logo --output ./src/svg/components/`
+`svg-to-react-native src/svg/images/logo Logo --output src/svg/components/`
 
 **NOTE**: image file must be in current working directory. Do not add the extension. If file is `image.svg`, then just enter `image` as the first argument. ComponentName will be the name of the sfc and filename with `.js` appended.
 
 ### Multi File
 
-`svg-to-react-native --dir src/svg/images/ --output ./src/svg/components/`
+`svg-to-react-native --dir src/svg/images/ --output src/svg/components/`
 
 or for all files in directory (will name all components in CamelCase based on image name. If image is `image.svg` then new component will be `Image` and file will be `Image.js`):
 
 
 **Optional Flags:**
 
-`-d, --directory <path>` - the dirctory from project folder to your svg images (./src/svg/images) (optional)
+`-d, --directory <path>` - the dirctory from project folder to your svg images (src/svg/images) (optional)
 
 `-o, --output <path>` - the output path. Do not include the filename.
 

@@ -60,7 +60,8 @@ And creates a new file with this:
 
 ```javascript
 
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Svg,
   Circle,
@@ -80,9 +81,25 @@ import {
   Stop
 } from 'react-native-svg';
 
-export default function TestSvg(props) {
-  return (
-    <Svg height="128px" id="Layer_1" width="128px" version="1.1" viewBox="0 0 128 128" x="0px" y="0px" xmlSpace="preserve">
+export default class TestSvg extends Component {
+  static propTypes = {
+    width: PropTypes.number,
+    height: PropTypes.number,
+    opacity: PropTypes.number,
+    style: PropTypes.any,
+  }
+
+  static defaultProps = {
+    width: 128,
+    height: 128,
+    opacity: 1,
+    style: {},
+  };
+
+  render() {
+    const { width, height, opacity, style } = this.props;
+  	return (
+    <Svg width={width} height={height} opacity={opacity} style={style} id="Layer_1" version="1.1" viewBox="0 0 128 128" x="0px" y="0px" xmlSpace="preserve">
     	<G>
     		<Circle x="64" y="64" fill="#E16B5A" r="64"/>
     		<Path d="M119.23,96.322c-0..." fill="#D16354"/>

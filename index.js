@@ -115,11 +115,15 @@ const runUtil = (fileToRead, fileToWrite) => {
         defaultHeight = height;
       }
 
-      if (!body.firstChild.hasAttribute('width')) {
-        body.firstChild.setAttribute('width', defaultWidth);
+      // Remove these attributes so we can hardcode width and height into the props in replaceAllStrings
+      if (body.firstChild.hasAttribute('width')) {
+        body.firstChild.removeAttribute('width');
       }
-      if (!body.firstChild.hasAttribute('height')) {
-        body.firstChild.setAttribute('height', defaultHeight);
+      if (body.firstChild.hasAttribute('height')) {
+        body.firstChild.removeAttribute('height');
+      }
+      if (body.firstChild.hasAttribute('opacity')) {
+        body.firstChild.removeAttribute('opacity');
       }
 
       // Add generic props attribute to parent element, allowing props to be passed to the svg

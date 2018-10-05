@@ -21,6 +21,7 @@ const generateComponent = require('./src/generateComponent');
 const printErrors = require('./src/output').printErrors;
 const removeStyle = require('./src/removeStyle');
 const replaceAllStrings = require('./src/replaceAllStrings');
+const alchemyLogo = require('./src/alchemyASCII');
 
 // Argument setup
 const args = yargs
@@ -77,6 +78,7 @@ const writeFile = (processedSVG, fileName) => {
       console.log();
       console.log(content.processCompleteText);
       console.log();
+      console.log(alchemyLogo());
     }
   });
 };

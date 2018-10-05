@@ -104,20 +104,20 @@ const runUtil = (fileToRead, fileToWrite) => {
       // 3rd - if no props, and no svg width/height, use the viewbox width/height as the width/height
       // 4th - if no props, svg width/height or viewbox, simlpy set it to 50px/50px
       let defaultWidth = '50px';
-      let defaultheight = '50px';
+      let defaultHeight = '50px';
       if (body.firstChild.hasAttribute('viewBox')) {
         const [minX, minY, width, height] = body.firstChild
           .getAttribute('viewBox')
           .split(/[,\s]+/);
         defaultWidth = width;
-        defaultheight = height;
+        defaultHeight = height;
       }
 
       if (!body.firstChild.hasAttribute('width')) {
         body.firstChild.setAttribute('width', defaultWidth);
       }
       if (!body.firstChild.hasAttribute('height')) {
-        body.firstChild.setAttribute('height', defaultheight);
+        body.firstChild.setAttribute('height', defaultHeight);
       }
 
       // Add generic props attribute to parent element, allowing props to be passed to the svg
@@ -134,7 +134,7 @@ const runUtil = (fileToRead, fileToWrite) => {
         jsx = replaceAllStrings(jsx);
 
         // Wrap it up in a React component
-        jsx = generateComponent(jsx, fileToWrite);
+        jsx = generateComponent(jsx, fileToWrite, defaultWidth, defaultHeight);
 
         writeFile(jsx, fileToWrite);
       });

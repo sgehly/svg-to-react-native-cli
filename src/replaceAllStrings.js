@@ -23,6 +23,7 @@ module.exports = function replaceAll(str) {
     '<radialGradient': '<RadialGradient',
     '<stop': '<Stop',
     '<clipPath': '<ClipPath',
+    '<mask': '<ClipPath',
     'svg>': 'Svg>',
     'circle>': 'Circle>',
     'ellipse>': 'Ellipse>',
@@ -43,6 +44,7 @@ module.exports = function replaceAll(str) {
     'radialGradient>': 'RadialGradient>',
     'stop>': 'Stop>',
     'clipPath>': 'ClipPath>',
+    'mask>': 'ClipPath>',
     cy: 'y',
     cx: 'x'
   };

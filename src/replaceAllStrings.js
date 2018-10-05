@@ -3,7 +3,7 @@ var svgtojsx = require('svg-to-jsx');
 module.exports = function replaceAll(str) {
   // replace all strings with Strings from array
   const mapObj = {
-    '<svg': '<Svg',
+    '<svg': '<Svg width={width} height={height} opacity={opacity} style={style}',
     '<circle': '<Circle',
     '<ellipse': '<Ellipse',
     '<g': '<G',

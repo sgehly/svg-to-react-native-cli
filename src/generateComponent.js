@@ -35,7 +35,7 @@ export default class ${componentName} extends Component {
     height: PropTypes.number,
     opacity: PropTypes.number,
     style: PropTypes.any,
-  }
+  };
 
   static defaultProps = {
     width: ${width},

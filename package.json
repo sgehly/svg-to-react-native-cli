@@ -1,7 +1,7 @@
 {
-  "name": "svg-to-react-native-cli",
-  "version": "0.0.3",
-  "description": "Based on svg-to-react-cli. A command line utility that takes a svg image file and outputs a fully formatted stateless functional React Native component with `height` and `width` for props. With flags to toggle formatting and remove style attributes.",
+  "name": "@pgprojectx/svg-to-react-native-cli",
+  "version": "1.0.0",
+  "description": "Based on svg-to-react-cli. A command line utility that takes a svg image file and outputs a fully formatted stateless functional React Native component with `height`, `width`, `opacity` and `style` for props. With flags to toggle formatting and remove style attributes.",
   "main": "index.js",
   "dependencies": {
     "chalk": "^1.1.3",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chrisbull/svg-to-react-native-cli.git"
+    "url": "git+https://github.com/pgalchemy/svg-to-react-native-cli.git"
   },
   "keywords": [
     "react",
@@ -23,12 +23,12 @@
     "svg",
     "component"
   ],
-  "author": "Chris Bull <chris@siteappy.com> (http://siteappy.com)",
+  "author": "Ben Thornburg <ben@alchemy.codes> (https://alchemy.codes)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chrisbull/svg-to-react-native-cli/issues"
+    "url": "https://github.com/pgalchemy/svg-to-react-native-cli/issues"
   },
-  "homepage": "https://github.com/chrisbull/svg-to-react-native-cli#readme",
+  "homepage": "https://github.com/pgalchemy/svg-to-react-native-cli#readme",
   "bin": {
     "svg-to-react-native": "./index.js"
   } 

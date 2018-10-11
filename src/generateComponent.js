@@ -46,10 +46,12 @@ export default class ${componentName} extends Component {
 
   render() {
     const { width, height, opacity, style } = this.props;
-${svgOutput
-  .split('\n')
-  .map(line => `    ${line}`)
-  .join('\n')}
+    return (
+      ${svgOutput
+        .split('\n')
+        .map(line => `    ${line}`)
+        .join('\n')}
+    );
   }
 }
-`;
+`

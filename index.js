@@ -75,9 +75,7 @@ const writeFile = (processedSVG, fileName) => {
 
     if (filesWritten === fileCount) {
       console.log(alchemyLogo());
-      console.log(
-        `${filesWritten} components created. That must be some kind of record!`
-      );
+      if (fileCount > 1) console.log(`${filesWritten} components created. That must be some kind of record!`);
       console.log();
       console.log(content.processCompleteText);
       console.log();

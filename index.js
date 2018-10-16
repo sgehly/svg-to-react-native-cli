@@ -45,10 +45,10 @@ const keepSnakeCase = args.snake;
 const converter = new HTMLtoJSX({ createClass: false });
 const svg = `./${firstArg}.svg`;
 let fileCount = 0;
+let filesWritten = 0;
 
 const writeFile = (processedSVG, fileName) => {
   let file;
-  let filesWritten = 0;
 
   if (outputPath) {
     file = path.resolve(process.cwd(), outputPath, `${fileName}.js`);

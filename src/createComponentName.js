@@ -8,7 +8,6 @@ const path = require('path');
  * @return string The output string
  */
 function snakeToCamel(s){
-  console.log('snakeToCamel: ', s);
   return s.replace(/((\-|_)\w)/g, function(m){return m[1].toUpperCase();});
 }
 

@@ -29,7 +29,8 @@ const args = yargs
   .option('format', { default: true })
   .option('output', { alias: 'o' })
   .option('rm-style', { default: false })
-  .option('force', { alias: 'f', default: false }).argv;
+  .option('force', { alias: 'f', default: false })
+  .option('snake', { alias: 's', default: false }).argv;
 
 // Resolve arguments
 const firstArg = args._[0];
@@ -38,6 +39,7 @@ const outputPath = args.output;
 const directoryPath = args.dir;
 const rmStyle = args.rmStyle;
 const format = args.format;
+const keepSnakeCase = args.snake;
 
 // Bootstrap base variables
 const converter = new HTMLtoJSX({ createClass: false });
@@ -161,7 +163,7 @@ const runUtilForAllInDir = () => {
 
       if (extension === '.svg') {
         // variable instantiated up top
-        const componentName = createComponentName(file, fileName);
+        const componentName = createComponentName(file, fileName, keepSnakeCase);
         runUtil(resolvedFile, componentName);
         fileCount++;
       }

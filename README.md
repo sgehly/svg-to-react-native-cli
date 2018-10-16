@@ -28,6 +28,12 @@ or for all files in directory (will name all components in CamelCase based on im
 
 `--example` - Prints an example of the i/o of this util.
 
+`--rm-style` - Removes style from SVG
+
+`-f, --force` - Convert and overwrite any existing output files
+
+`-s, --snake` - Prevents svg-to-react-native from automatically converting any snake_case filenames to CamelCase
+
 ## Example
 
 Takes this:

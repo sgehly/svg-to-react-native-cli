@@ -8,7 +8,8 @@ const path = require('path');
  * @return string The output string
  */
 function snakeToCamel(s){
-  return s.replace(/(\-\w)/g, function(m){return m[1].toUpperCase();});
+  console.log('snakeToCamel: ', s);
+  return s.replace(/((\-|_)\w)/g, function(m){return m[1].toUpperCase();});
 }
 
 /**
@@ -17,10 +18,10 @@ function snakeToCamel(s){
  * @param  string fileName
  * @return string
  */
-module.exports = function createComponentName(file, fileName) {
+module.exports = function createComponentName(file, fileName, keepSnakeCase) {
   let componentNamePrep;
 
-  if (fileName.indexOf('-') !== - 1) {
+  if ((fileName.indexOf('-') !== -1) || (fileName.indexOf('_') !== -1) && !keepSnakeCase) {
     componentNamePrep = snakeToCamel(path.basename(file, '.svg'));
   } else {
     componentNamePrep = path.basename(file, '.svg');

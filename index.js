@@ -45,10 +45,10 @@ const keepSnakeCase = args.snake;
 const converter = new HTMLtoJSX({ createClass: false });
 const svg = `./${firstArg}.svg`;
 let fileCount = 0;
+let filesWritten = 0;
 
 const writeFile = (processedSVG, fileName) => {
   let file;
-  let filesWritten = 0;
 
   if (outputPath) {
     file = path.resolve(process.cwd(), outputPath, `${fileName}.js`);
@@ -75,9 +75,7 @@ const writeFile = (processedSVG, fileName) => {
 
     if (filesWritten === fileCount) {
       console.log(alchemyLogo());
-      console.log(
-        `${filesWritten} components created. That must be some kind of record!`
-      );
+      if (fileCount > 1) console.log(`${filesWritten} components created. That must be some kind of record!`);
       console.log();
       console.log(content.processCompleteText);
       console.log();

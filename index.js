@@ -22,6 +22,7 @@ const printErrors = require('./src/output').printErrors;
 const removeStyle = require('./src/removeStyle');
 const replaceAllStrings = require('./src/replaceAllStrings');
 const alchemyLogo = require('./src/alchemyASCII');
+const stripColors = require('./src/stripColors');
 
 // Argument setup
 const args = yargs
@@ -141,6 +142,9 @@ const runUtil = (fileToRead, fileToWrite) => {
 
         // Wrap it up in a React component
         jsx = generateComponent(jsx, fileToWrite, defaultWidth, defaultHeight);
+
+        // strip colors and replace with a color array as a prop
+        jsx = stripColors(jsx);
 
         writeFile(jsx, fileToWrite);
       });

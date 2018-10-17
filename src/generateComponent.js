@@ -42,6 +42,7 @@ export default class ${componentName} extends Component {
     height: ${height},
     opacity: 1,
     style: {},
+    colors: [],
   };
 
   render() {

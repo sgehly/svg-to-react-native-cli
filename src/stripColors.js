@@ -26,8 +26,8 @@ module.exports = (input) => {
     return `{colors[${index}]}`;
   });
 
-  // replace colors props with array
-  output = output.replace('colors: [],', `colors: [${colorArray}],`);
+  // replace colors props with array (if there are any)
+  if (colorArray.length > 0) output = output.replace('colors: [],', `colors: ['${colorArray.join("','")}'],`);
 
   // return with replaced strings and colorArray for props
   return output;

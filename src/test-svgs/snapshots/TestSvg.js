@@ -39,7 +39,7 @@ export default class TestSvg extends Component {
   };
 
   render() {
-    const { width, height, opacity, style } = this.props;
+    const { width, height, opacity, style, colors } = this.props;
     return (
           <Svg width={width} height={height} opacity={opacity} style={style} id="Layer_1" version="1.1" viewBox="0 0 128 128" x="0px" y="0px" xmlSpace="preserve">
     	<G>

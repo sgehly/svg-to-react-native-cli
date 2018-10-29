@@ -35,6 +35,7 @@ export default class ${componentName} extends Component {
     height: PropTypes.number,
     opacity: PropTypes.number,
     style: PropTypes.any,
+    colors: PropTypes.array,
   };
 
   static defaultProps = {
@@ -42,6 +43,7 @@ export default class ${componentName} extends Component {
     height: ${height},
     opacity: 1,
     style: {},
+    colors: [],
   };
 
   render() {

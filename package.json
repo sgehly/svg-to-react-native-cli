@@ -1,6 +1,6 @@
 {
   "name": "@pgprojectx/svg-to-react-native-cli",
-  "version": "1.0.3",
+  "version": "0.0.0-development",
   "description": "Based on svg-to-react-cli. A command line utility that takes a svg image file and outputs a fully formatted stateless functional React Native component with `height`, `width`, `opacity` and `style` for props. With flags to toggle formatting and remove style attributes.",
   "main": "index.js",
   "dependencies": {
@@ -12,12 +12,15 @@
     "yargs": "^6.5.0"
   },
   "scripts": {
-    "test": "node index.js ./src/test-svgs/test TestSvg --output ./src/test-svgs/",
-    "testdir": "node index.js --dir ./src/test-svgs/ --output ./src/test-svgs/"
+    "test": "mocha",
+    "testsvg": "node index.js ./src/test-svgs/test TestSvg --output ./src/test-svgs/ --force",
+    "testdir": "node index.js --dir ./src/test-svgs/ --output ./src/test-svgs/ --force",
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once --pro"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pgalchemy/svg-to-react-native-cli.git"
+    "url": "https://github.com/pgalchemy/svg-to-react-native-cli.git"
   },
   "keywords": [
     "react",
@@ -33,5 +36,10 @@
   "homepage": "https://github.com/pgalchemy/svg-to-react-native-cli#readme",
   "bin": {
     "svg-to-react-native": "./index.js"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "semantic-release": "^15.10.6",
+    "travis-deploy-once": "^5.0.9"
   }
 }

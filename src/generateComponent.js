@@ -47,7 +47,7 @@ export default class ${componentName} extends Component {
   };
 
   render() {
-    const { width, height, opacity, style } = this.props;
+    const { width, height, opacity, style, colors } = this.props;
     return (
       ${svgOutput
         .split('\n')

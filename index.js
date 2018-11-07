@@ -1,41 +1,41 @@
 #!/usr/bin/env node
 
-'use strict';
+"use strict";
 
 // Vendor includes
-const chalk = require('chalk');
-const fs = require('fs');
-const yargs = require('yargs');
-const path = require('path');
-const HTMLtoJSX = require('htmltojsx');
-const jsdom = require('jsdom-no-contextify');
-const SVGtoJSX = require('svg-to-jsx');
+const chalk = require("chalk");
+const fs = require("fs");
+const yargs = require("yargs");
+const path = require("path");
+const HTMLtoJSX = require("htmltojsx");
+const { JSDOM } = require("jsdom");
+const SVGtoJSX = require("svg-to-jsx");
 
 // Language files
-const content = require('./lang/en');
+const content = require("./lang/en");
 
 // Local includes
-const createComponentName = require('./src/createComponentName');
-const formatSVG = require('./src/formatSVG');
-const generateComponent = require('./src/generateComponent');
-const printErrors = require('./src/output').printErrors;
-const removeStyle = require('./src/removeStyle');
-const replaceAllStrings = require('./src/replaceAllStrings');
-const alchemyLogo = require('./src/alchemyASCII');
-const stripColors = require('./src/stripColors');
+const createComponentName = require("./src/createComponentName");
+const formatSVG = require("./src/formatSVG");
+const generateComponent = require("./src/generateComponent");
+const printErrors = require("./src/output").printErrors;
+const removeStyle = require("./src/removeStyle");
+const replaceAllStrings = require("./src/replaceAllStrings");
+const alchemyLogo = require("./src/alchemyASCII");
+const stripColors = require("./src/stripColors");
 
 // Argument setup
 const args = yargs
-  .option('dir', { alias: 'd', default: false })
-  .option('format', { default: true })
-  .option('output', { alias: 'o' })
-  .option('rm-style', { default: false })
-  .option('force', { alias: 'f', default: false })
-  .option('snake', { alias: 's', default: false }).argv;
+  .option("dir", { alias: "d", default: false })
+  .option("format", { default: true })
+  .option("output", { alias: "o" })
+  .option("rm-style", { default: false })
+  .option("force", { alias: "f", default: false })
+  .option("snake", { alias: "s", default: false }).argv;
 
 // Resolve arguments
 const firstArg = args._[0];
-const newFileName = args._[1] || 'MyComponent';
+const newFileName = args._[1] || "MyComponent";
 const outputPath = args.output;
 const directoryPath = args.dir;
 const rmStyle = args.rmStyle;
@@ -57,11 +57,11 @@ const writeFile = (processedSVG, fileName) => {
     file = path.resolve(process.cwd(), `${fileName}.js`);
   }
 
-  fs.writeFile(file, processedSVG, { flag: args.force ? 'w' : 'wx' }, function(
+  fs.writeFile(file, processedSVG, { flag: args.force ? "w" : "wx" }, function(
     err
   ) {
     if (err) {
-      if (err.code === 'EEXIST') {
+      if (err.code === "EEXIST") {
         printErrors(
           `Output file ${file} already exists. Use the force (--force) flag to overwrite the existing files`
         );
@@ -72,11 +72,14 @@ const writeFile = (processedSVG, fileName) => {
     }
     filesWritten++;
 
-    console.log('File written to -> ' + file);
+    console.log("File written to -> " + file);
 
     if (filesWritten === fileCount) {
       console.log(alchemyLogo());
-      if (fileCount > 1) console.log(`${filesWritten} components created. That must be some kind of record!`);
+      if (fileCount > 1)
+        console.log(
+          `${filesWritten} components created. That must be some kind of record!`
+        );
       console.log();
       console.log(content.processCompleteText);
       console.log();
@@ -85,7 +88,7 @@ const writeFile = (processedSVG, fileName) => {
 };
 
 const runUtil = (fileToRead, fileToWrite) => {
-  fs.readFile(fileToRead, 'utf8', function(err, file) {
+  fs.readFile(fileToRead, "utf8", function(err, file) {
     if (err) {
       printErrors(err);
       return;
@@ -93,61 +96,61 @@ const runUtil = (fileToRead, fileToWrite) => {
 
     let output = file;
 
-    jsdom.env(output, (err, window) => {
-      const body = window.document.getElementsByTagName('body')[0];
+    const { window } = new JSDOM(output);
 
-      if (rmStyle) {
-        removeStyle(body);
-      }
+    const body = window.document.getElementsByTagName("body")[0];
 
-      // Add width and height
-      // The order of precedence of how width/height is set on to an element is as follows:
-      // 1st - passed in props are always priority one. This gives run time control to the container
-      // 2nd - svg set width/height is second priority
-      // 3rd - if no props, and no svg width/height, use the viewbox width/height as the width/height
-      // 4th - if no props, svg width/height or viewbox, simlpy set it to 50px/50px
-      let defaultWidth = '50px';
-      let defaultHeight = '50px';
-      if (body.firstChild.hasAttribute('viewBox')) {
-        const [minX, minY, width, height] = body.firstChild
-          .getAttribute('viewBox')
-          .split(/[,\s]+/);
-        defaultWidth = width;
-        defaultHeight = height;
-      }
+    if (rmStyle) {
+      removeStyle(body);
+    }
 
-      // Remove these attributes so we can hardcode width and height into the props in replaceAllStrings
-      if (body.firstChild.hasAttribute('width')) {
-        body.firstChild.removeAttribute('width');
-      }
-      if (body.firstChild.hasAttribute('height')) {
-        body.firstChild.removeAttribute('height');
-      }
-      if (body.firstChild.hasAttribute('opacity')) {
-        body.firstChild.removeAttribute('opacity');
-      }
+    // Add width and height
+    // The order of precedence of how width/height is set on to an element is as follows:
+    // 1st - passed in props are always priority one. This gives run time control to the container
+    // 2nd - svg set width/height is second priority
+    // 3rd - if no props, and no svg width/height, use the viewbox width/height as the width/height
+    // 4th - if no props, svg width/height or viewbox, simlpy set it to 50px/50px
+    let defaultWidth = "50px";
+    let defaultHeight = "50px";
+    if (body.firstChild.hasAttribute("viewBox")) {
+      const [minX, minY, width, height] = body.firstChild
+        .getAttribute("viewBox")
+        .split(/[,\s]+/);
+      defaultWidth = width;
+      defaultHeight = height;
+    }
 
-      // Add generic props attribute to parent element, allowing props to be passed to the svg
-      // such as className
-      body.firstChild.setAttribute(':props:', '');
+    // Remove these attributes so we can hardcode width and height into the props in replaceAllStrings
+    if (body.firstChild.hasAttribute("width")) {
+      body.firstChild.removeAttribute("width");
+    }
+    if (body.firstChild.hasAttribute("height")) {
+      body.firstChild.removeAttribute("height");
+    }
+    if (body.firstChild.hasAttribute("opacity")) {
+      body.firstChild.removeAttribute("opacity");
+    }
 
-      // Now that we are done with manipulating the node/s we can return it back as a string
-      output = body.innerHTML;
+    // Add generic props attribute to parent element, allowing props to be passed to the svg
+    // such as className
+    body.firstChild.setAttribute(":props:", "");
 
-      // Convert from HTML to JSX
-      // output = converter.convert(output);
-      SVGtoJSX(output).then(jsx => {
-        // Convert any html tags to react-native-svg tags
-        jsx = replaceAllStrings(jsx);
+    // Now that we are done with manipulating the node/s we can return it back as a string
+    output = body.innerHTML;
 
-        // Wrap it up in a React component
-        jsx = generateComponent(jsx, fileToWrite, defaultWidth, defaultHeight);
+    // Convert from HTML to JSX
+    // output = converter.convert(output);
+    SVGtoJSX(output).then(jsx => {
+      // Convert any html tags to react-native-svg tags
+      jsx = replaceAllStrings(jsx);
 
-        // strip colors and replace with a color array as a prop
-        jsx = stripColors(jsx);
+      // Wrap it up in a React component
+      jsx = generateComponent(jsx, fileToWrite, defaultWidth, defaultHeight);
 
-        writeFile(jsx, fileToWrite);
-      });
+      // strip colors and replace with a color array as a prop
+      jsx = stripColors(jsx);
+
+      writeFile(jsx, fileToWrite);
     });
   });
 };
@@ -163,9 +166,13 @@ const runUtilForAllInDir = () => {
       const extension = path.extname(resolvedFile);
       const fileName = path.basename(resolvedFile);
 
-      if (extension === '.svg') {
+      if (extension === ".svg") {
         // variable instantiated up top
-        const componentName = createComponentName(file, fileName, keepSnakeCase);
+        const componentName = createComponentName(
+          file,
+          fileName,
+          keepSnakeCase
+        );
         runUtil(resolvedFile, componentName);
         fileCount++;
       }

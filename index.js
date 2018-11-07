@@ -1,41 +1,41 @@
 #!/usr/bin/env node
 
-"use strict";
+'use strict';
 
 // Vendor includes
-const chalk = require("chalk");
-const fs = require("fs");
-const yargs = require("yargs");
-const path = require("path");
-const HTMLtoJSX = require("htmltojsx");
-const { JSDOM } = require("jsdom");
-const SVGtoJSX = require("svg-to-jsx");
+const chalk = require('chalk');
+const fs = require('fs');
+const yargs = require('yargs');
+const path = require('path');
+const HTMLtoJSX = require('htmltojsx');
+const { JSDOM } = require('jsdom');
+const SVGtoJSX = require('svg-to-jsx');
 
 // Language files
-const content = require("./lang/en");
+const content = require('./lang/en');
 
 // Local includes
-const createComponentName = require("./src/createComponentName");
-const formatSVG = require("./src/formatSVG");
-const generateComponent = require("./src/generateComponent");
-const printErrors = require("./src/output").printErrors;
-const removeStyle = require("./src/removeStyle");
-const replaceAllStrings = require("./src/replaceAllStrings");
-const alchemyLogo = require("./src/alchemyASCII");
-const stripColors = require("./src/stripColors");
+const createComponentName = require('./src/createComponentName');
+const formatSVG = require('./src/formatSVG');
+const generateComponent = require('./src/generateComponent');
+const printErrors = require('./src/output').printErrors;
+const removeStyle = require('./src/removeStyle');
+const replaceAllStrings = require('./src/replaceAllStrings');
+const alchemyLogo = require('./src/alchemyASCII');
+const stripColors = require('./src/stripColors');
 
 // Argument setup
 const args = yargs
-  .option("dir", { alias: "d", default: false })
-  .option("format", { default: true })
-  .option("output", { alias: "o" })
-  .option("rm-style", { default: false })
-  .option("force", { alias: "f", default: false })
-  .option("snake", { alias: "s", default: false }).argv;
+  .option('dir', { alias: 'd', default: false })
+  .option('format', { default: true })
+  .option('output', { alias: 'o' })
+  .option('rm-style', { default: false })
+  .option('force', { alias: 'f', default: false })
+  .option('snake', { alias: 's', default: false }).argv;
 
 // Resolve arguments
 const firstArg = args._[0];
-const newFileName = args._[1] || "MyComponent";
+const newFileName = args._[1] || 'MyComponent';
 const outputPath = args.output;
 const directoryPath = args.dir;
 const rmStyle = args.rmStyle;
@@ -57,11 +57,11 @@ const writeFile = (processedSVG, fileName) => {
     file = path.resolve(process.cwd(), `${fileName}.js`);
   }
 
-  fs.writeFile(file, processedSVG, { flag: args.force ? "w" : "wx" }, function(
+  fs.writeFile(file, processedSVG, { flag: args.force ? 'w' : 'wx' }, function(
     err
   ) {
     if (err) {
-      if (err.code === "EEXIST") {
+      if (err.code === 'EEXIST') {
         printErrors(
           `Output file ${file} already exists. Use the force (--force) flag to overwrite the existing files`
         );
@@ -72,7 +72,7 @@ const writeFile = (processedSVG, fileName) => {
     }
     filesWritten++;
 
-    console.log("File written to -> " + file);
+    console.log('File written to -> ' + file);
 
     if (filesWritten === fileCount) {
       console.log(alchemyLogo());
@@ -88,7 +88,7 @@ const writeFile = (processedSVG, fileName) => {
 };
 
 const runUtil = (fileToRead, fileToWrite) => {
-  fs.readFile(fileToRead, "utf8", function(err, file) {
+  fs.readFile(fileToRead, 'utf8', function(err, file) {
     if (err) {
       printErrors(err);
       return;
@@ -98,7 +98,7 @@ const runUtil = (fileToRead, fileToWrite) => {
 
     const { window } = new JSDOM(output);
 
-    const body = window.document.getElementsByTagName("body")[0];
+    const body = window.document.getElementsByTagName('body')[0];
 
     if (rmStyle) {
       removeStyle(body);
@@ -110,30 +110,30 @@ const runUtil = (fileToRead, fileToWrite) => {
     // 2nd - svg set width/height is second priority
     // 3rd - if no props, and no svg width/height, use the viewbox width/height as the width/height
     // 4th - if no props, svg width/height or viewbox, simlpy set it to 50px/50px
-    let defaultWidth = "50px";
-    let defaultHeight = "50px";
-    if (body.firstChild.hasAttribute("viewBox")) {
+    let defaultWidth = '50px';
+    let defaultHeight = '50px';
+    if (body.firstChild.hasAttribute('viewBox')) {
       const [minX, minY, width, height] = body.firstChild
-        .getAttribute("viewBox")
+        .getAttribute('viewBox')
         .split(/[,\s]+/);
       defaultWidth = width;
       defaultHeight = height;
     }
 
     // Remove these attributes so we can hardcode width and height into the props in replaceAllStrings
-    if (body.firstChild.hasAttribute("width")) {
-      body.firstChild.removeAttribute("width");
+    if (body.firstChild.hasAttribute('width')) {
+      body.firstChild.removeAttribute('width');
     }
-    if (body.firstChild.hasAttribute("height")) {
-      body.firstChild.removeAttribute("height");
+    if (body.firstChild.hasAttribute('height')) {
+      body.firstChild.removeAttribute('height');
     }
-    if (body.firstChild.hasAttribute("opacity")) {
-      body.firstChild.removeAttribute("opacity");
+    if (body.firstChild.hasAttribute('opacity')) {
+      body.firstChild.removeAttribute('opacity');
     }
 
     // Add generic props attribute to parent element, allowing props to be passed to the svg
     // such as className
-    body.firstChild.setAttribute(":props:", "");
+    body.firstChild.setAttribute(':props:', '');
 
     // Now that we are done with manipulating the node/s we can return it back as a string
     output = body.innerHTML;
@@ -166,7 +166,7 @@ const runUtilForAllInDir = () => {
       const extension = path.extname(resolvedFile);
       const fileName = path.basename(resolvedFile);
 
-      if (extension === ".svg") {
+      if (extension === '.svg') {
         // variable instantiated up top
         const componentName = createComponentName(
           file,

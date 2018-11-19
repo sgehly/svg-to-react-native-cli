@@ -1,12 +1,12 @@
 {
   "name": "@pgprojectx/svg-to-react-native-cli",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Based on svg-to-react-cli. A command line utility that takes a svg image file and outputs a fully formatted stateless functional React Native component with `height`, `width`, `opacity` and `style` for props. With flags to toggle formatting and remove style attributes.",
   "main": "index.js",
   "dependencies": {
     "chalk": "^1.1.3",
     "htmltojsx": "^0.3.0",
-    "jsdom-no-contextify": "^3.1.0",
+    "jsdom": "^13.0.0",
     "svg-to-jsx": "^0.0.21",
     "tinycolor2": "^1.4.1",
     "yargs": "^6.5.0"

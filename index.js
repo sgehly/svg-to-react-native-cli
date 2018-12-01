@@ -112,7 +112,7 @@ const runUtil = (fileToRead, fileToWrite) => {
     // 4th - if no props, svg width/height or viewbox, simlpy set it to 50px/50px
     let defaultWidth = '50px';
     let defaultHeight = '50px';
-    console.log(body);
+    console.log(fileToRead, body);
     if (body.firstChild.hasAttribute('viewBox')) {
       const [minX, minY, width, height] = body.firstChild
         .getAttribute('viewBox')

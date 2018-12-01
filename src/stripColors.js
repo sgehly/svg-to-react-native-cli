@@ -14,7 +14,7 @@ module.exports = (input) => {
   let output = input.replace(/["']#(?:[0-9a-fA-F]{3}){1,2}["']/ig, function(c) {
     // remove quotes
     let color = c.replace(/["']/g, "");
-
+    
     // when a color is found, add it to the array and replace with the index
     let colorObj = tinycolor(color);
 
@@ -23,7 +23,7 @@ module.exports = (input) => {
     if (index === -1) index = colorArray.push(colorObj.toHexString()) - 1;
 
     // insert color variable into JSX
-    return `{colors[${index}]}`;
+    return `colors[${index}]`;
   });
 
   // replace colors props with array (if there are any)

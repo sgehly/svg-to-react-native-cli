@@ -27,5 +27,5 @@ module.exports = function createComponentName(file, fileName, keepSnakeCase) {
   }
   const componentNameArr = componentNamePrep.split('');
   componentNameArr[0] = componentNameArr[0].toUpperCase();
-  return componentNameArr.join('');
+  return componentNameArr.join('').replace(/[0-9]/g, "");
 };

@@ -23,7 +23,7 @@ module.exports = (input) => {
     if (index === -1) index = colorArray.push(colorObj.toHexString()) - 1;
 
     // insert color variable into JSX
-    return `colors[${index}]`;
+    return `{colors[${index}]}`;
   });
 
   // replace colors props with array (if there are any)

@@ -87,7 +87,13 @@ const writeFile = (processedSVG, fileName) => {
   });
 };
 
+const processed = [];
+
 const runUtil = (fileToRead, fileToWrite) => {
+  
+  if(processed.indexOf(fileToWrite) !== -1) return;
+  processed.push(fileToWrite);
+  
   fs.readFile(fileToRead, 'utf8', function(err, file) {
     if (err) {
       printErrors(err);
